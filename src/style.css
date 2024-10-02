@@ -1,0 +1,29 @@
+
+
+#footerstyle {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+/* Sticky footer CSS */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;  /* Takes up remaining space */
+}
+
+.footer {
+    position: sticky;
+    top: 100vh;
+    margin-top: auto;
+}
