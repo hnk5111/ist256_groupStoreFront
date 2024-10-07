@@ -44,5 +44,24 @@
     </div>
 </div>
 
+<script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+
+	const name = document.getElementById("fullName").value.trim();
+        const password = document.getElementById("password").value.trim();
+	const fullName = document.getElementById("fullName").value.trim();
+	const age = document.getElementById("age").value.trim();
+	const address = document.getElementById("address").value.trim();
+                
+		if (!name) {
+            alert("Full Name is required.");
+            event.preventDefault();
+        } else if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            event.preventDefault();
+        }
+    });
+</script>
+
 </body>
 </html>
