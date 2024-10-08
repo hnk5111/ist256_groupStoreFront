@@ -18,8 +18,8 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center">Sign Up</h2>
-            <form>
-                <!-- Name entry -->
+            <form id="signupForm">
+                <!-- Full Name entry -->
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
                     <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
@@ -31,13 +31,31 @@
                     <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
                 </div>
 
+                <!-- Contact Phone Number entry (Optional) -->
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number (Optional)</label>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
+                </div>
+
+                <!-- Age entry -->
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age" placeholder="Enter your age" required>
+                </div>
+
+                <!-- Address entry -->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter your address" required>
+                </div>
+
                 <!-- Password entry -->
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
                 </div>
 
-                <!-- confirm button -->
+                <!-- Confirm button -->
                 <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
             </form>
         </div>
@@ -45,16 +63,24 @@
 </div>
 
 <script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-
-	const name = document.getElementById("fullName").value.trim();
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const address = document.getElementById("address").value.trim();
         const password = document.getElementById("password").value.trim();
-	const fullName = document.getElementById("fullName").value.trim();
-	const age = document.getElementById("age").value.trim();
-	const address = document.getElementById("address").value.trim();
-                
-		if (!name) {
+
+        if (!fullName) {
             alert("Full Name is required.");
+            event.preventDefault();
+        } else if (!email) {
+            alert("Email is required.");
+            event.preventDefault();
+        } else if (!age) {
+            alert("Age is required.");
+            event.preventDefault();
+        } else if (!address) {
+            alert("Address is required.");
             event.preventDefault();
         } else if (password.length < 6) {
             alert("Password must be at least 6 characters long.");
