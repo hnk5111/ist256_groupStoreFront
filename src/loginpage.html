@@ -64,13 +64,15 @@
 
 <script>
     document.getElementById("signupForm").addEventListener("submit", function(event) {
-        const fullName = document.getElementById("fullName").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phoneNumber").value.trim();
-        const age = document.getElementById("age").value.trim();
-        const address = document.getElementById("address").value.trim();
-        const password = document.getElementById("password").value.trim();
+        event.preventDefault();  // Prevent form submission and page reload
 
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phoneNumber").value;
+        const age = document.getElementById("age").value;
+        const address = document.getElementById("address").value;
+        const password = document.getElementById("password").value;
+        
         if (!fullName) {
             alert("Full Name is required.");
             event.preventDefault();
@@ -87,8 +89,21 @@
             alert("Password must be at least 6 characters long.");
             event.preventDefault();
         }
+
+        const formData = {
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            age: age,
+            address: address,
+            password: password
+        };
     });
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
