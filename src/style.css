@@ -27,3 +27,20 @@ body {
     top: 100vh;
     margin-top: auto;
 }
+
+.image-container {
+    position: relative;
+    width: 100%; /* Ensures container width is 100% */
+}
+
+.img-fluid {
+    width: 100%; /* Makes the GIF span the full width of the container */
+    height: auto; /* Maintains aspect ratio */
+}
+
+.btn-overlay {
+    position: absolute;
+    top: 90%; /* Adjust this value to move the button vertically */
+    left: 10%; /* Adjust this value to move the button horizontally */
+    transform: translate(-50%, -50%); /* Centers the button */
+}
