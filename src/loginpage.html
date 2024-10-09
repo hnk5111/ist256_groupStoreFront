@@ -68,6 +68,7 @@
 
         const fullName = document.getElementById("fullName").value;
         const email = document.getElementById("email").value;
+        const emailRegex = new RegExp("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
         const phone = document.getElementById("phoneNumber").value;
         const age = document.getElementById("age").value;
         const address = document.getElementById("address").value;
@@ -76,8 +77,8 @@
         if (!fullName) {
             alert("Full Name is required.");
             event.preventDefault();
-        } else if (!email) {
-            alert("Email is required.");
+        } else if (!email || !emailRegex.test(email)) {
+            alert("Valid email is required.");
             event.preventDefault();
         } else if (!age) {
             alert("Age is required.");
