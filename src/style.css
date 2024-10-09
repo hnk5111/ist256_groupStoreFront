@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-    flex: 1;  /* Takes up remaining space */
+    flex: 1;
 }
 
 .footer {
@@ -30,17 +30,18 @@ body {
 
 .image-container {
     position: relative;
-    width: 100%; /* Ensures container width is 100% */
+    width: 100%;
+    padding-bottom: 25px;
 }
 
 .img-fluid {
-    width: 100%; /* Makes the GIF span the full width of the container */
-    height: auto; /* Maintains aspect ratio */
+    width: 100%; 
+    height: auto; 
 }
 
 .btn-overlay {
     position: absolute;
-    top: 90%; /* Adjust this value to move the button vertically */
-    left: 10%; /* Adjust this value to move the button horizontally */
-    transform: translate(-50%, -50%); /* Centers the button */
+    top: 90%;
+    left: 10%; 
+    transform: translate(-50%, -50%); 
 }
