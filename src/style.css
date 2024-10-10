@@ -45,3 +45,18 @@ body {
     left: 10%; 
     transform: translate(-50%, -50%); 
 }
+
+.navbar{
+    height: 100%;  /* Set the navbar to a fixed height */
+    display: flex;
+    align-items: center;  /* Vertically center items */
+    background-color: #333;
+    padding: 0 20px;
+    }
+
+.logo{
+        height: 100px;  /* Image can be as tall as the navbar */
+        width: auto;       /* Maintain the image aspect ratio */
+        object-fit: contain;
+        
+    }
