@@ -36,4 +36,6 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
         address: address,
         password: password
     };
+
+    console.log(formData);
 });
