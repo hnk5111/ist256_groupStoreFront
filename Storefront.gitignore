@@ -1,1 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Attire</title>
+    <style>
+        .top-box {
+            width: 100%;
+            height: 25px;
+            background: black;
+            border: 2px solid black;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: white;
+        }
+        .top-box .text {
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        .top-box img {
+            height: 100%;
+            object-fit: contain;
+        }
+        </style>
+
+        <style>
+        .title-box {
+            width: 100%;
+            height: 75px;
+            background: grey;
+            border: 10px solid grey;
+            display: flex;
+            justify-content: center;
+            scroll-padding-block: 0;
+            padding-left: 20px;
+            align-items: center;
+            color: white;
+        }
+        .title-box .text {
+            font-size: 45px;
+            padding-top: 20px;
+            font-style: italic;
+        }
+
+        </style>
+
+        <style>
+        .content-container {
+            display: flex; 
+            gap: 20px; 
+            margin-top: 50px;
+            padding-left: 20px;
+        }
+
+        .content {
+            width: 300px;
+            height: 250px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #333;
+            padding-top: 5px;
+        }
+
+        .content img {
+            object-fit: contain;
+            background-color: gray;
+            height: 200px;
+        }
+
+        .content-new {
+            width: 300px; 
+            height: 250px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .content-new p {
+            font-size: 18px;
+            color: black; 
+            padding-top: 5px;
+        }
+
+        .content-new img{
+            object-fit: contain;
+            background-color: white;
+            height: 200px;
+
+        }
+
+        .content-new2 {
+            width: 300px; 
+            height: 250px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .content-new2 p {
+            font-size: 18px;
+            color: black; 
+            padding-top: 5px;
+        }
+
+        .content-new2 img{
+            object-fit: contain;
+            background-color: white;
+            height: 200px;
+
+        }
+
+        .content-last {
+            width: 300px; 
+            height: 250px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .content-last p {
+            font-size: 18px;
+            color: black; 
+            padding-top: 5px;
+        }
+
+        .content-last img{
+            object-fit: contain;
+            background-color: white;
+            height: 200px;
+
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="title-box">
+        <span class="text">Premium Attire</span>
+    </div>
+
+
+    <div class="top-box">
+        <span class="text"><a href="Sign-in.html"; style="color: white;">Sign In</a></span> 
+        <img src="https://th.bing.com/th/id/R.82bbbbe4f3143f0378c79972a5aaefad?rik=wEYOYn7whuVxWg&pid=ImgRaw&r=0" alt="Shopping Cart">
+    </div>
+    
+ 
+    <div class="content-container">
+       
+        <div class="content">
+            <img src="https://th.bing.com/th/id/OIP.5_tWLMJVtsFLqXnyqiEeEAHaHw?rs=1&pid=ImgDetMain" alt="Cool Shirt">
+            <p style="text-decoration: underline;">Per Fail/Fection Shirt</p>
+            <p style="scroll-padding-bottom:100px;"> $20</p>
+        </div>
+
+       
+        <div class="content-new">
+            <img src="https://th.bing.com/th/id/R.0a0cd901211f5a94c46a8e76adbae338?rik=ZMq06tFEsr0zdw&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f5%2fCotton-Pant-PNG-Images.png&ehk=zbQeGtkqgQaBS6wh7S1YepIQV%2b9XdSiZto67%2bbiGVlk%3d&risl=&pid=ImgRaw&r=0" alt="Cool Pants">
+            <p style="text-decoration: underline;">Silky Black Pants</p>
+            <p style="scroll-padding-bottom:100px;"> $35</p>
+        </div>
+
+        <div class="content-new2">
+            <img src="https://www.pngall.com/wp-content/uploads/4/Black-Leather-Jacket-PNG-Download-Image.png" alt="Cool Jacket">
+            <p style="text-decoration: underline;"> Premium Leather Jacket</p>
+            <p style="padding-bottom: 100px;">$65</p>
+        </div>
+
+        <div class="content-last">
+            <img src="https://th.bing.com/th/id/R.26ab33509a105a98486efcbc2cb67624?rik=jXWLHwWvDAzX6A&pid=ImgRaw&r=0" alt="Premium Leather Belt">
+            <p style="text-decoration: underline;"> Premium Leather Belt</p>
+            <p style="padding-bottom: 100px;">$45</p>
+
+        </div>
+    </div>
+</body>
+</html>
 
