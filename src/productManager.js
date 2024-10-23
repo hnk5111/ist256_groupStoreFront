@@ -1,32 +1,43 @@
 
-let productList = [];
+let productList = JSON.parse(localStorage.getItem('productList')) || [];  
+
+
+$(document).ready(function() {
+    updateProductList();
+});
 
 
 $('#saveProductBtn').click(function() {
     const product = {
-        id: $('#productId').val(),
-        description: $('#productDescription').val(),
-        category: $('#productCategory').val(),
-        unit: $('#productUnit').val(),
+        id: $('#productId').val().trim(),
+        description: $('#productDescription').val().trim(),
+        category: $('#productCategory').val().trim(),
+        unit: $('#productUnit').val().trim(),
         price: parseFloat($('#productPrice').val()),
-        weight: $('#productWeight').val() ? parseFloat($('#productWeight').val()) : null
+        weight: $('#productWeight').val() ? parseFloat($('#productWeight').val()) : null,
+        timestamp: new Date().toLocaleString() 
     };
 
-  
-    if (!product.id || !product.description || !product.category || !product.unit || !product.price) {
-        alert('Please fill out all required fields.');
+    if (!product.id || !product.description || !product.category || !product.unit || isNaN(product.price)) {
+        alert('Please fill out all required fields with valid data.');
         return;
     }
 
-    
+    const productTimestamp = new Date(product.timestamp).getTime();
+
+    productList = productList.filter(p => p.id !== product.id || new Date(p.timestamp).getTime() >= productTimestamp);
+
     productList.push(product);
 
- 
+    localStorage.setItem('productList', JSON.stringify(productList));
+
     $('#productForm')[0].reset();
 
-    
     updateProductList();
+
+    alert('Product saved successfully!');
 });
+
 
 
 function updateProductList() {
@@ -41,7 +52,11 @@ function updateProductList() {
             <strong>Category:</strong> ${product.category},
             <strong>Unit:</strong> ${product.unit},
             <strong>Price:</strong> ${product.price.toFixed(2)},
-            <strong>Weight:</strong> ${product.weight !== null ? product.weight : 'N/A'}
+            <strong>Weight:</strong> ${product.weight !== null ? product.weight : 'N/A'},
+        </div>
+            <div class="text-end">
+                <small><strong>Date Added/Updated:</strong> ${product.timestamp}</small>
+        </div>
         </li>`;
         productItems.append(item);
     }
