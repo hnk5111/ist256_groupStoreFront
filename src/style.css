@@ -1,4 +1,10 @@
+#footer{
+    background-color: #0C0E07;
+}
 
+#navbar{
+    background-color: #000000 !important;
+}
 
 #footerstyle {
     padding: 20px;
@@ -49,7 +55,6 @@ body {
     height: 100%;  /* Set the navbar to a fixed height */
     display: flex;
     align-items: center;  /* Vertically center items */
-    background-color: #333;
     padding: 0 20px;
     }
 
