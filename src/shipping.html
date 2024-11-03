@@ -1,3 +1,4 @@
+<!-- shipping.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +11,19 @@
 <body>
 
     <nav id="navbar" class="navbar navbar-default p-3" role="navigation">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">Chef on Ski's</a>
-            <a class="nav-link" href="checkout.html">Back to Checkout</a>
-        </div>
-    </nav>
+		<div class="container-fluid d-flex justify-content-between align-items-center">
+			<div class="navbar-header d-flex align-items-center"><a class="navbar-brand" href="homepage.html">Chef on Ski's</a></div>
+			<div class="ml-auto"><a class="nav-link" href="homepage.html"><img class="logo" src="images/logo.jpg"></a></div>
+			<div class="ml-auto d-flex align-items-center">
+			<a class="nav-link" href="order.html">Order Online</a>
+			<a class="nav-link" href="loginpage.html">Sign Up</a>
+			</div>
+		</div>
+	</nav>
 
     <div class="container py-5">
         <h2>Shipping Selection</h2>
+        <div id="orderTotal" class="my-4"></div>
         <form onsubmit="confirmOrder(event)">
             <div class="form-group">
                 <label for="shippingDestination">Destination</label>
@@ -41,21 +47,30 @@
             <button type="submit" class="btn btn-primary">Confirm Order</button>
         </form>
 
-        <div id="orderSummary" class="my-4">
-        </div>
+        <div id="orderSummary" class="my-4"></div>
     </div>
 
     <script>
         window.onload = function() {
             const customerInfo = JSON.parse(localStorage.getItem('customerInfo'));
+            const cart = JSON.parse(localStorage.getItem('shoppingcart')) || [];
             const orderSummary = document.getElementById('orderSummary');
+            const orderTotalContainer = document.getElementById('orderTotal');
+            let totalAmount = 0;
+
+            if (cart.length > 0) {
+                cart.forEach(item => {
+                    totalAmount += item.quantity * item.price;
+                });
+                orderTotalContainer.innerHTML = `<h4>Total: $${totalAmount.toFixed(2)}</h4>`;
+            }
+
 
             if (customerInfo) {
                 orderSummary.innerHTML = `
                     <h4>Order Summary</h4>
                     <p><strong>Name:</strong> ${customerInfo.name}</p>
                     <p><strong>Email:</strong> ${customerInfo.email}</p>
-                    <p><strong>Address:</strong> ${customerInfo.address}</p>
                 `;
             }
         };
