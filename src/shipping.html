@@ -1,25 +1,82 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <title>Group Storefront</title>
-	<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Selection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-	
 <body>
-    <!-- Navigation Bar -->
+
     <nav id="navbar" class="navbar navbar-default p-3" role="navigation">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="navbar-header d-flex align-items-center"><a class="navbar-brand" href="#">Chef on Ski's</a></div>
-            <div class="ml-auto"><a class="nav-link" href="homepage.html"><img class="logo" src="images/logo.jpg"></a></div>
-            <div class="ml-auto"><a class="nav-link" href="checkout.html">Back to Checkout</a></div>
+            <a class="navbar-brand" href="#">Chef on Ski's</a>
+            <a class="nav-link" href="checkout.html">Back to Checkout</a>
         </div>
     </nav>
 
     <div class="container py-5">
-        <h2>Shipping</h2>
+        <h2>Shipping Selection</h2>
+        <form onsubmit="confirmOrder(event)">
+            <div class="form-group">
+                <label for="shippingDestination">Destination</label>
+                <input type="text" class="form-control" id="shippingDestination" required>
+            </div>
+            <div class="form-group">
+                <label for="shippingCarrier">Shipping Carrier</label>
+                <select class="form-control" id="shippingCarrier">
+                    <option value="fedex">FedEx</option>
+                    <option value="ups">UPS</option>
+                    <option value="dhl">DHL</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="shippingMethod">Shipping Method</label>
+                <select class="form-control" id="shippingMethod">
+                    <option value="standard">Standard</option>
+                    <option value="express">Express</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm Order</button>
+        </form>
+
+        <div id="orderSummary" class="my-4">
+        </div>
     </div>
+
+    <script>
+        window.onload = function() {
+            const customerInfo = JSON.parse(localStorage.getItem('customerInfo'));
+            const orderSummary = document.getElementById('orderSummary');
+
+            if (customerInfo) {
+                orderSummary.innerHTML = `
+                    <h4>Order Summary</h4>
+                    <p><strong>Name:</strong> ${customerInfo.name}</p>
+                    <p><strong>Email:</strong> ${customerInfo.email}</p>
+                    <p><strong>Address:</strong> ${customerInfo.address}</p>
+                `;
+            }
+        };
+
+        function confirmOrder(event) {
+            event.preventDefault();
+
+            const shippingDetails = {
+                destination: document.getElementById('shippingDestination').value,
+                carrier: document.getElementById('shippingCarrier').value,
+                method: document.getElementById('shippingMethod').value
+            };
+
+            alert('Thank you for your purchase! Your order has been confirmed.');
+
+            localStorage.removeItem('shoppingcart');
+            localStorage.removeItem('customerInfo');
+
+            window.location.href = 'homepage.html';
+        }
+    </script>
+
 </body>
 </html>
