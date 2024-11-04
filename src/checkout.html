@@ -63,7 +63,7 @@
                 cart.forEach(item => {
                     const itemRow = document.createElement('div');
                     itemRow.innerHTML = `
-                        <p>${item.name} - ${item.quantity} x $${item.price} = $${(item.quantity * item.price).toFixed(2)}</p>
+                        <p>${item.quantity}x ${item.name} $${item.price} = $${(item.quantity * item.price).toFixed(2)}</p>
                     `;
                     checkoutItemsContainer.appendChild(itemRow);
                     totalAmount += item.quantity * item.price;
