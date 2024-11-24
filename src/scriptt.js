@@ -2,11 +2,25 @@
 $("#billingForm").on("submit", function (event) {
     event.preventDefault();
 
-    const billingData = {
-        name: $("#billingName").val(),
-        address: $("#billingAddress").val(),
-        payment: $("#billingPayment").val()
-    };
+    // Check if billing info exists in local storage
+    const storedBillingData = localStorage.getItem("billingInfo");
+    let billingData;
+
+    if (storedBillingData) {
+        billingData = JSON.parse(storedBillingData);
+        alert("Found Billing info:", billingData);
+    } else { 
+        billingData = {
+            name: $("#billingName").val(),
+            address: $("#billingAddress").val(),
+            payment: $("#billingPayment").val()
+        };
+
+            alert("Using input data", billingData);
+    }
+
+    // Save updated billing info to local storage under the key "billingData"
+    localStorage.setItem("billingData", JSON.stringify(billingData));
 
     // Send billing info to the server
     $.ajax({
@@ -15,10 +29,10 @@ $("#billingForm").on("submit", function (event) {
         contentType: "application/json",
         data: JSON.stringify(billingData),
         success: function (response) {
-            alert("Billing info submitted successfully!");
+        
         },
         error: function () {
-            alert("Failed to submit billing info.");
+    
         }
     });
 });
@@ -28,7 +42,7 @@ $("#returnForm").on("submit", function (event) {
     event.preventDefault();
 
     const returnData = {
-        productId: $("#returnProductID").val()
+        productName: $("#returnProductName").val()
     };
 
     // Send return info to the server
