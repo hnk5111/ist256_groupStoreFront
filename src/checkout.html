@@ -41,7 +41,7 @@
                     <option value="paypal">PayPal</option>
                 </select>
             </div>
-            <button type="button" onclick="goToShipping()" class="btn btn-primary">Next</button>
+            <button type="button" onclick="goToShipping()" class="btn btn-primary" id="nextButton" disabled>Next</button>
         </form>
 
         <div id="checkoutItems" class="my-4"></div>
@@ -75,6 +75,21 @@
                     totalAmount += item.quantity * item.price;
                 });
             }
+
+            const nameField = document.getElementById('customerName');
+            const emailField = document.getElementById('customerEmail');
+            const nextButton = document.getElementById('nextButton');
+
+            function validateForm() {
+            // Check if both fields are filled
+            const isNameValid = nameField.value.trim() !== '';
+            const isEmailValid = emailField.value.trim() !== '';
+            nextButton.disabled = !(isNameValid && isEmailValid);
+            }
+
+            // Attach event listeners to fields
+            nameField.addEventListener('input', validateForm);
+            emailField.addEventListener('input', validateForm);
         };
 
         function goToShipping() {
