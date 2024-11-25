@@ -1,26 +1,56 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const port = 3000;
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
+const app = express();
+const PORT = 3000;
+
+app.use(cors());
 app.use(bodyParser.json());
 
-// Endpoint to handle billing information
-app.post('/api/billing', (req, res) => {
-    const billingInfo = req.body;
-    console.log("Billing info received:", billingInfo);
-    // Process billing information here, such as saving to a database
-    res.status(200).send("Billing info received");
+// MongoDB Connection
+const MONGO_URI = "mongodb://localhost:27017/storefront";
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((err) => console.error("MongoDB connection error:", err));
+
+// MongoDB Schemas and Models
+const BillingSchema = new mongoose.Schema({
+    name: String,
+    address: String,
+    payment: String,
 });
 
-// Endpoint to handle return requests
-app.post('/api/returns', (req, res) => {
-    const returnInfo = req.body;
-    console.log("Return request received:", returnInfo);
-    // Process return request here, such as updating the database or handling refunds
-    res.status(200).send("Return request received");
+const ReturnSchema = new mongoose.Schema({
+    productName: String,
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+const Billing = mongoose.model("Billing", BillingSchema);
+const Return = mongoose.model("Return", ReturnSchema);
+
+// API Endpoints
+app.post("/api/billing", async (req, res) => {
+    try {
+        const newBilling = new Billing(req.body);
+        await newBilling.save();
+        res.status(200).send("Billing information saved successfully.");
+    } catch (err) {
+        res.status(500).send("Error saving billing information.");
+    }
+});
+
+app.post("/api/returns", async (req, res) => {
+    try {
+        const newReturn = new Return(req.body);
+        await newReturn.save();
+        res.status(200).send("Return request saved successfully.");
+    } catch (err) {
+        res.status(500).send("Error saving return request.");
+    }
+});
+
+// Start Server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
