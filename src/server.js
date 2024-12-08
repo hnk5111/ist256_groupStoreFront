@@ -1,56 +1,76 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const cors = require("cors");
-
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+
 app.use(bodyParser.json());
 
-// MongoDB Connection
-const MONGO_URI = "mongodb://localhost:27017/storefront";
-mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("MongoDB connection error:", err));
 
-// MongoDB Schemas and Models
-const BillingSchema = new mongoose.Schema({
-    name: String,
-    address: String,
-    payment: String,
-});
+mongoose.connect('mongodb://localhost:27017/storefront', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((error) => console.error('Error connecting to MongoDB:', error));
 
-const ReturnSchema = new mongoose.Schema({
-    productName: String,
-});
 
-const Billing = mongoose.model("Billing", BillingSchema);
-const Return = mongoose.model("Return", ReturnSchema);
+const Shopper = require('./models/shopper');
+const Product = require('./models/product');
+const Cart = require('./models/cart');
+const Return = require('./models/return');
 
-// API Endpoints
-app.post("/api/billing", async (req, res) => {
+
+app.post('/api/shopper', async (req, res) => {
     try {
-        const newBilling = new Billing(req.body);
-        await newBilling.save();
-        res.status(200).send("Billing information saved successfully.");
-    } catch (err) {
-        res.status(500).send("Error saving billing information.");
+        const shopper = new Shopper(req.body);
+        const savedShopper = await shopper.save();
+        res.status(201).json(savedShopper);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating shopper', error });
     }
 });
 
-app.post("/api/returns", async (req, res) => {
+app.get('/api/shopper', async (req, res) => {
     try {
-        const newReturn = new Return(req.body);
-        await newReturn.save();
-        res.status(200).send("Return request saved successfully.");
-    } catch (err) {
-        res.status(500).send("Error saving return request.");
+        const shoppers = await Shopper.find();
+        res.json(shoppers);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching shoppers', error });
     }
 });
 
-// Start Server
+
+app.post('/api/products', async (req, res) => {
+    try {
+        const product = new Product(req.body);
+        const savedProduct = await product.save();
+        res.status(201).json(savedProduct);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating product', error });
+    }
+});
+
+
+app.post('/api/cart', async (req, res) => {
+    try {
+        const cartItem = new Cart(req.body);
+        const savedCartItem = await cartItem.save();
+        res.status(201).json(savedCartItem);
+    } catch (error) {
+        res.status(500).json({ message: 'Error adding to cart', error });
+    }
+});
+
+
+app.post('/api/returns', async (req, res) => {
+    try {
+        const returnRequest = new Return(req.body);
+        const savedReturn = await returnRequest.save();
+        res.status(201).json(savedReturn);
+    } catch (error) {
+        res.status(500).json({ message: 'Error processing return', error });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
