@@ -1,21 +1,28 @@
 const mongoose = require("mongoose");
 
 const ShopperSchema = new mongoose.Schema({
-    name: String,
+    fullname: String,
     email: String,
+    phone: Number,
+    age: Number,
     address: String,
+    password: String,
 });
 
 const ProductSchema = new mongoose.Schema({
-    name: String,
+    id: Number,
+    description: String,
+    category: String,
+    unit: String,
     price: Number,
-    stock: Number,
+    weight: String,
+    timestamp: String,
 });
 
-const BillingSchema = new mongoose.Schema({
-    shopperId: String,
-    address: String,
-    paymentMethod: String,
+const CartSchema = new mongoose.Schema({
+    name: String,
+    price: Number,
+    quantity: Number,
 });
 
 const ReturnSchema = new mongoose.Schema({
@@ -26,7 +33,7 @@ const ReturnSchema = new mongoose.Schema({
 
 const Shopper = mongoose.model("Shopper", ShopperSchema);
 const Product = mongoose.model("Product", ProductSchema);
-const Billing = mongoose.model("Billing", BillingSchema);
 const Return = mongoose.model("Return", ReturnSchema);
+const Cart = mongoose.model("Cart", CartSchema);
 
-module.exports = { Shopper, Product, Billing, Return };
+module.exports = { Shopper, Product, Cart, Return };
